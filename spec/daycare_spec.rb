@@ -4,7 +4,7 @@ require './lib/daycare'
 
 RSpec.describe Daycare do
   before(:each) do
-    @daycare = Daycare.new("Daddy Daycare")
+    @daycare = Daycare.new("Daddy Daycare", {cat:10, dog:15, parrot:40})
   end
 
   it 'exists' do
@@ -74,8 +74,15 @@ RSpec.describe Daycare do
     expect(@daycare.unfed_pets).to eq([samson, spot])
   end
 
+  it 'can feed a pet' do
+    joel = Customer.new("Joel", 2)
+    samson = Pet.new({name: "Samson", type: :dog, age: 3})
+    joel.adopt(samson)
+    @daycare.add_customer(joel)
+    @daycare.feed_pets
 
-
-
+    expect(samson.fed?).to be true
+    expect(joel.outstanding_balance).to eq(15)
+  end
 
 end

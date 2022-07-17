@@ -20,6 +20,11 @@ RSpec.describe Customer do
     @joel.adopt(lucy)
     expect(@joel.pets).to eq([samson, lucy])
   end
+  it 'can adopt a pet and the pet knows its owner' do
+    samson = Pet.new({name: "Samson", type: :dog, age: 3})
+    @joel.adopt(samson)
+    expect(samson.owner).to eq(@joel)
+  end
   it 'has a default outstanding balance of 0' do
     expect(@joel.outstanding_balance).to be(0)
   end

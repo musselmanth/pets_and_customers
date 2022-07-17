@@ -14,6 +14,7 @@ class Customer
 
   def adopt(pet)
     @pets << pet
+    pet.owner = self
   end
 
   def charge(amount)

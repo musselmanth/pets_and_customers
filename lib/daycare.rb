@@ -1,10 +1,12 @@
 class Daycare
   attr_reader :name,
-              :customers
+              :customers,
+              :feed_prices
 
-  def initialize(name)
+  def initialize(name, feed_prices)
     @name = name
     @customers = []
+    @feed_prices = feed_prices #hash
   end
 
   def add_customer(customer)
@@ -23,6 +25,13 @@ class Daycare
       end
     end
     pets.select{ |pet| !pet.fed? }
+  end
+
+  def feed_pets
+    unfed_pets.each do |pet|
+      pet.feed
+      pet.owner.charge(@feed_prices[pet.type])
+    end
   end
 
 end
