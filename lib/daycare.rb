@@ -11,4 +11,8 @@ class Daycare
     @customers << customer
   end
 
+  def find_customer_by_id(searched_id)
+    @customers.find{ |customer| customer.id == searched_id }
+  end
+
 end
