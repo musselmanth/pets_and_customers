@@ -44,6 +44,18 @@ RSpec.describe Daycare do
     expect(@daycare.customers[1].pets).to eq([spot])
   end
 
+  it 'can obtain customers' do
+    joel = Customer.new("Joel", 2)
+    robin = Customer.new("Robin", 3)
+    jim = Customer.new("Jim", 4)
+    @daycare.add_customer(joel)
+    @daycare.add_customer(robin)
+    @daycare.add_customer(jim)
+
+    expect(@daycare.find_customer_by_id(2)).to eq(joel)
+    expect(@daycare.find_customer_by_id(4)).to eq(jim)
+  end
+
 
 
 
