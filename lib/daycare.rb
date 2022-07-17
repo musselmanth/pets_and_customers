@@ -16,12 +16,6 @@ class Daycare
   end
 
   def unfed_pets
-    # @customers.each do |customer|
-    #   array = customer.pets.select do |pet|
-    #     !pet.fed? 
-    #   end
-    #   require 'pry'; binding.pry
-    # end
     pets = []
     @customers.each do |customer|
       customer.pets.each do |pet|
