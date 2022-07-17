@@ -44,7 +44,7 @@ RSpec.describe Daycare do
     expect(@daycare.customers[1].pets).to eq([spot])
   end
 
-  it 'can obtain customers' do
+  it 'can find a customer by id' do
     joel = Customer.new("Joel", 2)
     robin = Customer.new("Robin", 3)
     jim = Customer.new("Jim", 4)
@@ -54,6 +54,24 @@ RSpec.describe Daycare do
 
     expect(@daycare.find_customer_by_id(2)).to eq(joel)
     expect(@daycare.find_customer_by_id(4)).to eq(jim)
+  end
+
+  it 'can list all pets that are unfed' do
+    joel = Customer.new("Joel", 2)
+    robin = Customer.new("Robin", 3)
+    samson = Pet.new({name: "Samson", type: :dog, age: 3})
+    lucy = Pet.new({name: "Lucy", type: :cat, age: 12})  
+    spot = Pet.new({name: "Spot", type: :parrot, age: 32})
+    joel.adopt(samson)
+    joel.adopt(lucy)
+    robin.adopt(spot)
+    @daycare.add_customer(joel)
+    @daycare.add_customer(robin)
+
+    expect(@daycare.unfed_pets).to eq([samson, lucy, spot])
+    lucy.feed
+
+    expect(@daycare.unfed_pets).to eq([samson, spot])
   end
 
 
